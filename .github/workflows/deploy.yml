@@ -31,19 +31,19 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: /public_html/testsite/ # Change this to your server's web root path
+          REMOTE_PORT: "21098" # Explicitly tells rsync to use cPanel's custom SSH port
+          TARGET: /home/scottkle/public_html/testsite/
           SOURCE: site/
           ARGS: "-rlgoDIVzz --delete"
 
-      # Temporary step to see exactly where files are going
+      # Step 5: Debug Server Directories (Updated to use the custom port)
       - name: Debug Server Directories
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 21098 # Forces the debug tool to use the same custom port
           script: |
-            echo "--- Contents of testsite folder ---"
+            echo "--- Checking true directory contents ---"
             ls -la /home/scottkle/public_html/testsite/
-            echo "--- Checking if a nested 'site' folder exists ---"
-            ls -la /home/scottkle/public_html/testsite/site/ || echo "No nested folder found"
