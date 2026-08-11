@@ -25,12 +25,15 @@ jobs:
       - name: Build Static Site
         run: uv run --frozen zensical build
 
-      # Step 4: Deploy new or modified files over FTP (Firewall proof)
-      - name: Sync Build Folder via FTP
+      # Step 4: Deploy new or modified files over Secure FTPS
+      - name: Sync Build Folder via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./site/ # Syncs the compiled Zensical output folder
-          server-dir: public_html/testsite/ # Reclaim Hosting target path
+          port: 990 # Standard secure FTPS port
+          security: ftps # Forces the runner to use encrypted TLS security mechanisms
+          local-dir: ./site/
+          server-dir: public_html/testsite/
+
