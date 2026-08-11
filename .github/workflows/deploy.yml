@@ -34,3 +34,16 @@ jobs:
           TARGET: /public_html/testsite/ # Change this to your server's web root path
           SOURCE: site/
           ARGS: "-rlgoDIVzz --delete"
+
+      # Temporary step to see exactly where files are going
+      - name: Debug Server Directories
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "--- Contents of testsite folder ---"
+            ls -la /home/scottkle/public_html/testsite/
+            echo "--- Checking if a nested 'site' folder exists ---"
+            ls -la /home/scottkle/public_html/testsite/site/ || echo "No nested folder found"
