@@ -31,6 +31,6 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
-          TARGET: /home/scottkle/public_html/testsite/ # Change this to your server's web root path
+          TARGET: /public_html/testsite/ # Change this to your server's web root path
           SOURCE: site/
           ARGS: "-rlgoDIVzz --delete"
