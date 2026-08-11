@@ -32,8 +32,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 990 # Standard secure FTPS port
-          security: ftps # Forces the runner to use encrypted TLS security mechanisms
+          port: 21 # cPanel prefers Explicit TLS over standard port 21
+          protocol: ftps # Correct parameter to trigger TLS encryption standard
+          security: loose # Tells GitHub to trust the shared SSL certificate of your host
           local-dir: ./site/
           server-dir: public_html/testsite/
-
