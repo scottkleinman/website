@@ -31,7 +31,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
-          REMOTE_PORT: "21098" # Explicitly tells rsync to use cPanel's custom SSH port
+          REMOTE_PORT: "2222" # Explicitly tells rsync to use cPanel's custom SSH port
           TARGET: /home/scottkle/public_html/testsite/
           SOURCE: site/
           ARGS: "-rlgoDIVzz --delete"
@@ -43,7 +43,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 21098 # Forces the debug tool to use the same custom port
+          port: 2222 # Forces the debug tool to use the same custom port
           script: |
             echo "--- Checking true directory contents ---"
             ls -la /home/scottkle/public_html/testsite/
