@@ -32,8 +32,8 @@ jobs:
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
           REMOTE_PORT: "2222" # Explicitly tells rsync to use cPanel's custom SSH port
-          TARGET: /home/scottkle/public_html/testsite/
-          SOURCE: site/
+          TARGET: /public_html/testsite/
+          SOURCE: ./site/
           ARGS: "-rlgoDIVzz --delete"
 
       # Step 5: Debug Server Directories (Updated to use the custom port)
