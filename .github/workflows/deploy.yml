@@ -1,4 +1,5 @@
-name: Build and Deploy Zensical Site via SSH
+name: Build and Deploy Zensical Site via FTP
+
 on:
   push:
     branches:
@@ -17,33 +18,19 @@ jobs:
       - name: Set up uv
         uses: astral-sh/setup-uv@v5
         with:
-          enable-cache: true # Detects changes in uv.lock to manage the cache efficiently
+          enable-cache: true
           version: "latest"
 
       # Step 3: Run Zensical build strictly using pinned versions
       - name: Build Static Site
-        run: uv run --frozen zensical build # --frozen forces the exact environment defined in your uv.lock
+        run: uv run --frozen zensical build
 
-      # Step 4: Deploy only new or modified build files using rsync
-      - name: Sync Build Folder to Server
-        uses: easingthemes/ssh-deploy@main
+      # Step 4: Deploy new or modified files over FTP (Firewall proof)
+      - name: Sync Build Folder via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.SSH_HOST }}
-          REMOTE_USER: ${{ secrets.SSH_USER }}
-          REMOTE_PORT: "2222" # Explicitly tells rsync to use cPanel's custom SSH port
-          TARGET: /public_html/testsite/
-          SOURCE: ./site/
-          ARGS: "-rlgoDIVzz --delete"
-
-      # Step 5: Debug Server Directories (Updated to use the custom port)
-      - name: Debug Server Directories
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 2222 # Forces the debug tool to use the same custom port
-          script: |
-            echo "--- Checking true directory contents ---"
-            ls -la /home/scottkle/public_html/testsite/
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./site/ # Syncs the compiled Zensical output folder
+          server-dir: public_html/testsite/ # Reclaim Hosting target path

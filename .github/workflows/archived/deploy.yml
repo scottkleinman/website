@@ -1,0 +1,49 @@
+name: Build and Deploy Zensical Site via SSH
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Fetch the latest code from your repository
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # Step 2: Install uv and link the automatic cache to your lockfile
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true # Detects changes in uv.lock to manage the cache efficiently
+          version: "latest"
+
+      # Step 3: Run Zensical build strictly using pinned versions
+      - name: Build Static Site
+        run: uv run --frozen zensical build # --frozen forces the exact environment defined in your uv.lock
+
+      # Step 4: Deploy only new or modified build files using rsync
+      - name: Sync Build Folder to Server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          REMOTE_PORT: "2222" # Explicitly tells rsync to use cPanel's custom SSH port
+          TARGET: /public_html/testsite/
+          SOURCE: ./site/
+          ARGS: "-rlgoDIVzz --delete"
+
+      # Step 5: Debug Server Directories (Updated to use the custom port)
+      - name: Debug Server Directories
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 2222 # Forces the debug tool to use the same custom port
+          script: |
+            echo "--- Checking true directory contents ---"
+            ls -la /home/scottkle/public_html/testsite/
