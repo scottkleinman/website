@@ -34,5 +34,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 22
           source: "./site/"
-          target: "/home/username/public_html/testsite/"
+          target: "public_html/testsite/"
 
