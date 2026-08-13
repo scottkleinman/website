@@ -9,3 +9,12 @@ wheels/
 
 # Virtual environments
 .venv
+
+# node_modules
+node_modules/
+
+# justfile
+.justfile
+
+# Other ignored files
+TODO.md
