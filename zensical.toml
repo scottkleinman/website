@@ -25,7 +25,7 @@ extra_javascript = ["js/footnote-container.js"]
 [project.theme]
 # variant = "classic"
 custom_dir = "overrides"
-favicon = "assets/images/site/favicon-16x16.png"
+favicon = "assets/images/site-images/favicon-16x16.png"
 language = "en"
 features = [
   "announce.dismiss",
@@ -56,7 +56,7 @@ features = [
   # "toc.integrate",
 ]
 
-logo = "assets/images/site/favicon-32x32.png"
+logo = "assets/images/site-images/favicon-32x32.png"
 
 # [project.theme.icon]
 # logo = "lucide/smile"
