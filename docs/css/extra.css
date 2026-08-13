@@ -24,6 +24,9 @@
   background: var(--md-default-bg-color, #fff);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .projects-card:hover {
@@ -33,7 +36,8 @@
 
 .projects-card img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   display: block;
 }
 
@@ -42,6 +46,7 @@
   font-size: 0.95rem;
   line-height: 1.55;
   color: var(--md-default-fg-color--muted, #5c5c5c);
+  margin-top: auto;
 }
 
 .cv-title-row {
