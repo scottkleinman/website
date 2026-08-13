@@ -1,173 +1,21 @@
 ---
-icon: lucide/rocket
+title: Scott Kleinman
+hide:
+  - navigation
 ---
 
-# Get started
+<figure markdown="span">
 
-For full documentation visit [zensical.org](https://zensical.org/docs/).
+![Image of Scott Kleinman](assets/images/scott-kleinman.jpg){ width="400" }
 
-## Commands
+</figure>
 
-* [`zensical new`][new] - Create a new project
-* [`zensical serve`][serve] - Start local web server
-* [`zensical build`][build] - Build your site
+I am Professor of [English](http://www.csun.edu/english/){target="_blank"} at [California State University, Northridge](http://www.csun.edu/){target="_blank"}, where I have taught since August 1999. Prior to coming to Northridge, I taught at the [University of Missouri, Columbia](http://www.missouri.edu/){target="_blank"} from 1997-1999. I received my MA at the [University of St Andrews](http://www.st-and.ac.uk/){target="_blank"} in Scotland and my PhD in [Anglo-Saxon, Norse, and Celtic](http://www.asnc.cam.ac.uk/){target="_blank"} from the [University of Cambridge](http://www.cam.ac.uk/){target="_blank"}.
 
-  [new]: https://zensical.org/docs/usage/new/
-  [serve]: https://zensical.org/docs/usage/preview/
-  [build]: https://zensical.org/docs/usage/build/
+I work on medieval language and literature from the period before the Norman Conquest to the fourteenth century with a special emphasis on Old English and early Middle English. My early work was on the history of the English language during the Old English period, especially the development of phonology and its dialects. More recently I have worked on regional and cultural diversity in historiographical and romance literature.
 
-## Examples
+I have strong interests in using technology for both research and teaching and am working to understand how the growing field of Digital Humanities can expand our knowledge of an access to the cultures of the Middle Ages and how digital methods can open up new questions in the Humanities more broadly. In 2010 I established the [CSUN Center for the Digital Humanities](http://www.csun.edu/digitalhumanities/){target="_blank"}, of which I am currently director.
 
-### Admonitions
+My Digital Humanities work includes the NEH-Funded [Lexomics Project](http://wheatoncollege.edu/lexomics/){target="_blank"}, which studies literature using digital methods and produces the computational text analysis tool [*Lexos*](lexos.wheatoncollege.edu){target="_blank"}. For more information on my scholarship, see my [Projects](/projects/) and [*Curriculum Vitae*](/cv/) pages.
 
-> Go to [documentation](https://zensical.org/docs/authoring/admonitions/)
-
-!!! note
-
-    This is a **note** admonition. Use it to provide helpful information.
-
-!!! warning
-
-    This is a **warning** admonition. Be careful!
-
-### Details
-
-> Go to [documentation](https://zensical.org/docs/authoring/admonitions/#collapsible-blocks)
-
-??? info "Click to expand for more info"
-
-    This content is hidden until you click to expand it.
-    Great for FAQs or long explanations.
-
-## Code Blocks
-
-> Go to [documentation](https://zensical.org/docs/authoring/code-blocks/)
-
-``` python hl_lines="2" title="Code blocks"
-def greet(name):
-    print(f"Hello, {name}!") # (1)!
-
-greet("Python")
-```
-
-1.  > Go to [documentation](https://zensical.org/docs/authoring/code-blocks/#code-annotations)
-
-    Code annotations allow to attach notes to lines of code.
-
-Code can also be highlighted inline: `#!python print("Hello, Python!")`.
-
-## Content tabs
-
-> Go to [documentation](https://zensical.org/docs/authoring/content-tabs/)
-
-=== "Python"
-
-    ``` python
-    print("Hello from Python!")
-    ```
-
-=== "Rust"
-
-    ``` rs
-    println!("Hello from Rust!");
-    ```
-
-## Diagrams
-
-> Go to [documentation](https://zensical.org/docs/authoring/diagrams/)
-
-``` mermaid
-graph LR
-  A[Start] --> B{Error?};
-  B -->|Yes| C[Hmm...];
-  C --> D[Debug];
-  D --> B;
-  B ---->|No| E[Yay!];
-```
-
-## Footnotes
-
-> Go to [documentation](https://zensical.org/docs/authoring/footnotes/)
-
-Here's a sentence with a footnote.[^1]
-
-Hover it, to see a tooltip.
-
-[^1]: This is the footnote.
-
-
-## Formatting
-
-> Go to [documentation](https://zensical.org/docs/authoring/formatting/)
-
-- ==This was marked (highlight)==
-- ^^This was inserted (underline)^^
-- ~~This was deleted (strikethrough)~~
-- H~2~O
-- A^T^A
-- ++ctrl+alt+del++
-
-## Icons, Emojis
-
-> Go to [documentation](https://zensical.org/docs/authoring/icons-emojis/)
-
-* :sparkles: `:sparkles:`
-* :rocket: `:rocket:`
-* :tada: `:tada:`
-* :memo: `:memo:`
-* :eyes: `:eyes:`
-
-## Maths
-
-> Go to [documentation](https://zensical.org/docs/authoring/math/)
-
-$$
-\cos x=\sum_{k=0}^{\infty}\frac{(-1)^k}{(2k)!}x^{2k}
-$$
-
-!!! warning "Needs configuration"
-    Note that MathJax is included via a `script` tag on this page and is not
-    configured in the generated default configuration to avoid including it
-    in a pages that do not need it. See the documentation for details on how
-    to configure it on all your pages if they are more Maths-heavy than these
-    simple starter pages.
-
-<script id="MathJax-script" src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [["\\(", "\\)"]],
-      displayMath: [["\\[", "\\]"]],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      ignoreHtmlClass: ".*|",
-      processHtmlClass: "arithmatex"
-    }
-  };
-
-  document$.subscribe(() => {
-    MathJax.startup.output.clearCache()
-    MathJax.typesetClear()
-    MathJax.texReset()
-    MathJax.typesetPromise()
-  })
-</script>
-
-## Task Lists
-
-> Go to [documentation](https://zensical.org/docs/authoring/lists/#using-task-lists)
-
-* [x] Install Zensical
-* [x] Configure `zensical.toml`
-* [x] Write amazing documentation
-* [ ] Deploy anywhere
-
-## Tooltips
-
-> Go to [documentation](https://zensical.org/docs/authoring/tooltips/)
-
-[Hover me][example]
-
-  [example]: https://example.com "I'm a tooltip!"
+At Cal State Northridge I teach [courses](/teaching/) on Old and Middle English literature, Chaucer, History of the English Language, and the Digital Humanities. I have also taught a variety of early British survey courses, writing about literature, Tolkien and medievalism, English grammar, and interdisciplinary courses on Scottish Culture and the Early Modern World.

@@ -1,0 +1,129 @@
+{% extends "main.html" %}
+
+{% block extrahead %}
+<style>
+    :root {
+        --parchment: #f4ecd8;
+        --ink: #2c1a04;
+        --rubric: #a62626;
+        --gold: #c5a059;
+    }
+
+    .custom-404-page {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 0 1rem;
+    }
+
+    .scroll-container {
+        background-color: var(--parchment);
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15), inset 0 0 40px rgba(0,0,0,0.05);
+        max-width: 920px;
+        width: 100%;
+        text-align: center;
+        border: 8px double var(--gold);
+        position: relative;
+    }
+
+    .error-code {
+        font-size: clamp(3rem, 4vw, 5rem);
+        font-weight: bold;
+        color: var(--rubric);
+        margin: 0;
+        font-family: 'Times New Roman', serif;
+        letter-spacing: 2px;
+    }
+
+    .drop-cap {
+        font-size: 3.5rem;
+        float: left;
+        line-height: 0.8;
+        margin-top: 8px;
+        margin-right: 8px;
+        color: var(--rubric);
+        font-family: 'Times New Roman', serif;
+        border: 2px solid var(--gold);
+        padding: 4px 8px;
+        background: #fffdf7;
+    }
+
+    h2 {
+        margin-top: 10px;
+        font-style: italic;
+        color: #4a3319;
+    }
+
+    p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-align: left;
+        margin-bottom: 30px;
+        clear: both;
+    }
+
+    .marginalia {
+        font-size: 0.95rem;
+        font-style: italic;
+        color: #705335;
+        border-left: 3px solid var(--gold);
+        padding-left: 15px;
+        margin: 20px 0;
+        text-align: left;
+        background: rgba(197, 160, 89, 0.05);
+    }
+
+    .btn-bad {
+        display: inline-block;
+        background-color: var(--rubric);
+        color: white !important;
+        padding: 12px 24px;
+        text-decoration: none !important;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .btn-bad:hover {
+        background-color: transparent;
+        color: var(--rubric) !important;
+        border-color: var(--rubric) !important;
+        box-shadow: 0 4px 10px rgba(166, 38, 38, 0.2);
+    }
+
+    .md-sidebar--secondary {
+        display: none !important;
+    }
+
+    .md-main__inner.md-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    .md-content {
+        max-width: 100% !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="custom-404-page">
+  <div class="scroll-container">
+    <div class="error-code">CDIV / 404</div>
+    <h2>Here Endeth the Known Web</h2>
+
+    <p>
+      <span class="drop-cap">T</span>he page thou seekest has either vanished into the mists of time, been devoured by a legendary dragon, or never existed in this scriptorium at all.
+    </p>
+
+    <div class="marginalia">
+      <strong>Marginalia found in the code:</strong><br>
+      "The ink is thin. The server is cold. Titivillus, the demon of scribal errors, hath surely corrupted this URL string."
+    </div>
+
+    <a href="/" class="btn-bad">Return to the Present (Homepage)</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {% if page and page.meta and page.meta.robots %}
+    <meta name="robots" content="{{ page.meta.robots }}" />
+  {% else %}
+    <meta name="robots" content="index, follow" />
+  {% endif %}
+
+
+  {% if page and page.meta and page.meta.description %}
+    <meta name="description" content="{{ page.meta.description }}" />
+  {% endif %}
+
+  {% if page and page.meta and page.meta.keywords %}
+    <meta name="keywords" content="{{ page.meta.keywords }}" />
+  {% else %}
+    <meta name="keywords" content="medieval,digital humanities,philology" />
+  {% endif %}
+
+    <meta property="og:title" content="ScottKleinman.com">
+    <meta property="og:url" content="http://scottkleinman.com">
+    <meta property="og:description" content="The personal website of Scott Kleinman, Professor of English at California State University, Northridge.">
+    <meta property="og:image" content="/assets/img/scott-kleinman.jpg">
+    <meta property="og:type" content="website">
+{% endblock %}
+
+{% block announce %}
+  <p style="font-weight: bold;">My site is getting a refresh! Please excuse any clunky navigation or out-of-date information during this process and check back soon for updates!</p>
+{% endblock %}

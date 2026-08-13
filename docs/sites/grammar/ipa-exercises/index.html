@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPA Exercises</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        main {
+            margin-top: 30px;
+        }
+
+        .check {
+            display: none;
+        }
+
+        #quiz {
+            margin-top: 15px;
+        }
+
+        #question_label {
+            font-weight: bold;
+        }
+
+        #ipa_symbols {
+            margin-bottom: 15px;
+        }
+    </style>
+    <script>
+        function decode_escpae(s) {
+            /* Decodes a Unicode escape sequence to a string */
+            var r = /\\u([\d\w]{4})/gi;
+            s = s.replace(r, function (match, grp) {
+                return String.fromCharCode(parseInt(grp, 16));
+            });
+            return s
+        }
+
+        function getRandom(obj, item) {
+            /* Get a random item from an obect. */
+            // Select which property to operate on.
+            var itemArr = obj[item];
+            // Generate a random number (between [0-1]). Round to an integer.
+            // Make sure the result is between 0 and length - 1
+            var index = Math.round((Math.random() * itemArr.length)) % itemArr.length;
+            return {
+                property: itemArr,
+                index: index,
+                value: itemArr[index],
+            }
+        }
+
+        function GenerateRandomQuestion(questions) {
+            /* Return an object with the random key-value pair.*/
+            var keys = Object.keys(questions);
+            var randomIndex = keys.length * Math.random() << 0;
+            var k = keys[randomIndex];
+            var v = questions[k];
+            var o = {};
+            o[k] = v;
+            return o;
+        };
+
+        function setQuestion(questions) {
+            /* Call this on load or when a new question is selected */
+            var randomQuestion = GenerateRandomQuestion(questions)
+            $.each(randomQuestion, function (key, value) {
+                $('#question_label').text(key);
+                $('#question').val("");
+                $('#answer').hide();
+                $('#answer').val(value); //.text(value);
+            });
+        }
+
+        function showAnswer() {
+            /* Show the answer. */
+            $('#answer').show();
+        }
+    </script>
+</head>
+
+<body>
+    <main class="container">
+        <h1>IPA Exercises</h1>
+        <section id="intro">
+            <p>This exercise generates random words for you to transcribe into the International Phonetic Alphabet
+                (IPA). The answers are designed to familiarise you with with the simplified
+                <strong>phonological</strong>
+                transcription system we will be using in English 400. They are not phonetic transcriptions and may
+                therefore differ from your actual spoken pronunciation. So do not worry if your transcriptions do not
+                exactly match the suggested answers at first. You will eventually learn the system.
+            </p>
+            <p>Click <strong>Show Answer</strong> to check your transcription. Click <strong>New Word</strong>
+                to generate a new prompt. You may enter your transcription in the form field before checking it against
+                the suggested answer. Clicking the <strong>Common IPA Symbols</strong> buttons will insert the symbols
+                in the form field. Alternatively, you can write out your transcription before viewing the answer.</p>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            The following notes may be helpful:
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                <li>Vowel length is not indicated since it is sensitive to phonetic context in most
+                                    Modern English dialects.
+                                </li>
+                                <li>In words of more than one syllable, the stressed syllable is preceded by
+                                    <strong>ˈ</strong>.
+                                </li>
+                                <li>Historical <em>o</em> which has been unrounded in Modern American dialects (as in
+                                    <em>God</em>) is
+                                    generally represented <strong>/ɔ/</strong>.
+                                    Words with syllabic consonants in words like <em>button</em> are represented as two
+                                    syllables with a
+                                    schwa in the last syllable.
+                                    In stressed syllables, and occasionally elsewhere, the lowered version of schwa is
+                                    represented <strong>/ʌ/</strong>.
+                                </li>
+                                <li>In a few cases, the answers provide some alternative answers to allow for some
+                                    common American
+                                    pronunciations, but this is not done consistently.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="quiz">
+            <div id="ipa_symbols">
+                <legend>Common IPA Symbols <a href="https://www.cambridge.org/features/IPAchart/"
+                        target="_blank"><button type="button" class="btn btn-sm btn-outline-info">View IPA
+                            Chart</button></a></legend>
+                <button class="btn btn-sm btn-success keyboard">ae</button>
+                <button class="btn btn-sm btn-success keyboard">v_upside</button>
+                <button class="btn btn-sm btn-success keyboard">schwa</button>
+                <button class="btn btn-sm btn-success keyboard">epsilon</button>
+                <button class="btn btn-sm btn-success keyboard">I_small</button>
+                <button class="btn btn-sm btn-success keyboard">o_open</button>
+                <button class="btn btn-sm btn-success keyboard">u_horseshoe</button>
+                <button class="btn btn-sm btn-success keyboard">eth</button>
+                <button class="btn btn-sm btn-success keyboard">ng</button>
+                <button class="btn btn-sm btn-success keyboard">sh</button>
+                <button class="btn btn-sm btn-success keyboard">theta</button>
+                <button class="btn btn-sm btn-success keyboard">chi</button>
+                <button class="btn btn-sm btn-success keyboard">gamma</button>
+                <button class="btn btn-sm btn-success keyboard">zh</button>
+                <button class="btn btn-sm btn-success keyboard">glottal_ stop</button>
+                <button class="btn btn-sm btn-success keyboard">primary_stress</button>
+            </div>
+
+            <form>
+                <div class="row mb-3">
+                    <label id="question_label" for="question" class="col-sm-1 col-form-label"></label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="question"
+                            placeholder="Enter IPA transcription here">
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="answer" value="answer">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button id="check" type="button" class="btn btn-primary">Show Answer</button>
+                        <button id="new" type="button" class="btn btn-primary">New Word</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script>
+        if ('undefined' == typeof window.jQuery) {
+            alert("Could not load Javascript. You must have internet access to use this page.");
+        }
+        const questions = {
+            "buy": "/bai/",
+            "cab": "/kæb/",
+            "dye": "/dai/",
+            "cad": "/kæd/",
+            "ladder": "/ˈlædər/",
+            "dew": "/du/",
+            "giant": "/ˈdʒaiənt/",
+            "badge": "/bædʒ/",
+            "thy": "/ðai/",
+            "breathe": "/brið/",
+            "find": "/faind/",
+            "leaf": "/lif/",
+            "guy": "/gai/",
+            "bag": "/bæg/",
+            "high": "/hai/",
+            "ahead": "/əˈhɛd/",
+            "whine": ["/wain/ or /hwain/"],
+            "yes": "/jɛs/",
+            "hallelujah": "/haleˈluja/",
+            "kind": "/kaind/",
+            "sky": "/skai/",
+            "crack": "/kræk/",
+            "lie": "/lai/",
+            "ply": "/plai/",
+            "lute": "/lut/",
+            "my": "/mai/",
+            "smile": "/smail/",
+            "nigh": "/nai/",
+            "snide": "/snaid/",
+            "can": "/kan/",
+            "new": "/nu/",
+            "sink": "/siŋk/",
+            "singer": "/ˈsiŋger/",
+            "pie": "/pai/",
+            "cap": "/kæp/",
+            "rye": "/rai/",
+            "try": "/trai/",
+            "very": "/ˈvɛri/",
+            "sigh": "/sai/",
+            "consume": "/kənˈsum/",
+            "shy": "/ʃai/",
+            "cash": "/kæʃ/",
+            "emotion": ["/əˈmoʃən/ or /iˈmoʃən/"],
+            "tie": "/tai/",
+            "sty": "/stai/",
+            "cat": "/kæt/",
+            "latter": "/ˈlætər/",
+            "tune": "/tun/",
+            "China": "/ˈtʃainə/",
+            "catch": "/kætʃ/",
+            "thigh": "/θai/",
+            "path": "/pæθ/",
+            "vie": "/vai/",
+            "leave": "/liv/",
+            "wine": "/wain/",
+            "swine": "/swain/",
+            "zoo": "/zu/",
+            "has": "/hæz/",
+            "Zeus": "/zus/",
+            "resume": ["/rəˈzum/ or /riˈzum/"],
+            "pleasure": "/ˈplɛʒər/",
+            "beige": "/beʒ/",
+            "palm": "/pam/",
+            "bra": "/bra/",
+            "father": "/ˈfaðər/",
+            "start": "/start/",
+            "lot": "/lɔt/",
+            "blocade": "/blɔˈked/",
+            "cot": "/kɔt/",
+            "bother": "/ˈbɔðər/",
+            "moral": "/ˈmɔrəl/",
+            "trap": "/træp/",
+            "tattoo": "/tæˈtu/",
+            "sang": "/seng/",
+            "marry": ["/ˈmæri/ or /ˈmɛri/"],
+            "price": "/praɪs/",
+            "hire": "/haɪr/",
+            "mouth": "/maʊθ/",
+            "how": "/haʊ/",
+            "flour": "/flaʊr/",
+            "dress": "/drɛs/",
+            "prestige": "/prɛˈstiʒ/",
+            "length": "/leŋθ/ or /lɛŋθ/",
+            "merry": "/ˈmɛri/",
+            "face": "/fes/",
+            "square": "/sker/",
+            "Mary": ["/ˈmeri/ or /ˈmɛri/"],
+            "kit": "/kɪt/",
+            "historic": "/hɪˈstorɪk/",
+            "sing": "/siŋ/",
+            "mirror": "/ˈmɪrər/",
+            "fleece": "/flis/",
+            "pedigree": "/ˈpɛdəgri/",
+            "idea": "/aiˈdiə/",
+            "goat": "/got/",
+            "force": "/fɔrs/",
+            "hoarse": "/hɔrs/",
+            "thought": "/θɔt/",
+            "audacious": "/ɔˈdeʃəs/",
+            "caught": "/kɔt/",
+            "north": "/nɔrθ/",
+            "horse": "/hɔrs/",
+            "choice": "/tʃois/",
+            "foot": "/fʊt/",
+            "courier": "/ˈkʊriər/",
+            "goose": "/gus/",
+            "cruel": "/ˈkruəl/",
+            "cure": "/kjur/",
+            "strut": "/strʌt/",
+            "untidy": "/ʌnˈtaidi/",
+            "trustee": "/ˈtrʌsti/",
+            "sung": "/sʌŋ/",
+            "nurse": "/ˈnərs/",
+            "blurry": "/ˈbləri/",
+            "urbane": "/ərˈben/",
+            "foreword": "/ˈfɔrwərd/",
+            "comma": "/ˈkɔmə/",
+            "abbot": "/ˈæbət/",
+            "bazaar": "/bəˈzar/",
+            "letter": "/ˈlɛtər/",
+            "forward": "/ˈfɔrwərd/",
+            "history": "/ˈhɪstori/",
+            "rabbit": "/ˈræbɪt/",
+            "bizarre": "/ˈbɪzar/",
+            "Latin": "/ˈlatɪn/",
+            "motto": "/ˈmɔto/",
+            "retroactive": "/rɛtroˈæktɪv/",
+            "follower": "/ˈfɔlowər/",
+            "happy": "/ˈhæpi/",
+            "mediocre": "/midiˈokər/",
+            "California": "/kælɪˈfɔrniə/",
+            "fruition": "/fruˈɪʃən/",
+            "bottle": "/ˈbɔtəl/",
+            "doubling": "/ˈdʌbliŋ/",
+            "button": "/ˈbʌtən/",
+            "rhythm": "/ˈrɪðəm/",
+            "loch": "/lɔx/",
+            "uh-oh": "/ˈʔʌʔo/",
+            "taxpayer": "/ˈtækspeər/"
+        }
+
+        var chars = {}
+        chars['ae'] = '\u00E6';
+        chars['v_upside'] = '\u028C';
+        chars['schwa'] = '\u0259';
+        chars['epsilon'] = '\u025B';
+        chars['I_small'] = '\u026A';
+        chars['o_open'] = '\u0254';
+        chars['u_horseshoe'] = '\u028A';
+        chars['eth'] = '\u00F0';
+        chars['ng'] = '\u014B';
+        chars['sh'] = '\u0283';
+        chars['theta'] = '\u03B8';
+        chars['chi'] = '\u03C7';
+        chars['gamma'] = '\u0263';
+        chars['zh'] = '\u0292';
+        chars['glottal_ stop'] = '\u0294';
+        chars['primary_stress'] = '\u02C8';
+
+
+        $(function () {
+            setQuestion(questions);
+            $(".keyboard").each(function (index, object) {
+                let key = $(object).text();
+                let symbol = chars[key];
+                $(object).text(symbol);
+            });
+
+            $(".keyboard").click(function () {
+                let input = $("#question").val();
+                $("#question").val(input + $(this).text());
+                $("#question").focus();
+            });
+
+            $("#check").click(function () {
+                $("#answer").show();
+            });
+
+            $("#new").click(function () {
+                setQuestion(questions);
+            });
+        });
+    </script>
+</body>
+
+</html>

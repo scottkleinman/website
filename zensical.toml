@@ -1,27 +1,31 @@
 [project]
-site_url = "https://www.example.com/"
-site_name = "Documentation"
-# site_description = "Your project description"
-# site_author = "Your name"
+site_url = "https://scottkleinman.com/"
+site_name = "ScottKleinman.com"
+site_description = "Scott Kleinman's personal website"
+site_author = "Scott Kleinman"
 
-# copyright = "Copyright &copy; 2026 Your name"
+copyright = "Copyright &copy; 2016- Scott Kleinman"
 
 # repo_url = "https://github.com/user/repo"
 # repo_name = "user/repo"
 # edit_uri = "edit/main/docs/"
 
 nav = [
-  { "Get started" = "index.md" },
-  { "Markdown in 5min" = "markdown.md" },
+  { "Teaching and Advising" = "teaching.md" },
+  { "Publications" = "publications.md" },
+  { "Projects" = "projects/index.md" },
+  { "Curriculum Vitae" = "cv.md" },
+  { "Blog" = "blog/index.md" },
 ]
 
-# extra_css = ["stylesheets/extra.css"]
-# extra_javascript = ["javascripts/extra.js"]
+extra_css = ["css/extra.css"]
+extra_javascript = ["js/footnote-container.js"]
+# extra_javascript = ["js/extra.js"]
 
 [project.theme]
 # variant = "classic"
-# custom_dir = "overrides"
-# favicon = "images/favicon.png"
+custom_dir = "overrides"
+favicon = "assets/images/site/favicon-16x16.png"
 language = "en"
 features = [
   "announce.dismiss",
@@ -43,8 +47,8 @@ features = [
   "navigation.path",
   # "navigation.prune",
   "navigation.sections",
-  # "navigation.tabs",
-  # "navigation.tabs.sticky",
+  "navigation.tabs",
+  "navigation.tabs.sticky",
   "navigation.top",
   "navigation.tracking",
   "search.highlight",
@@ -52,7 +56,7 @@ features = [
   # "toc.integrate",
 ]
 
-# logo = "assets/logo.png"
+logo = "assets/images/site/favicon-32x32.png"
 
 # [project.theme.icon]
 # logo = "lucide/smile"
@@ -78,20 +82,35 @@ scheme = "slate"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to system preference"
 
-# [[project.extra.social]]
-# icon = "fontawesome/brands/github"
-# link = "https://github.com/user/repo"
+[project.extra]
+homepage = "/"
 
-# [[project.extra.social]]
-# icon = "fontawesome/brands/mastodon"
-# link = "https://fosstodon.org/@user"
+[[project.extra.analytics]]
+provider = "google"
+property = "G-4Q7GZ8FVE9"
+
+[[project.extra.social]]
+icon = "fontawesome/solid/envelope"
+link = "mailto://scott.kleinman@csun.edu"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/scottkleinman"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/bluesky"
+link = "https://bsky.app/profile/skleinman.bsky.social"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/orcid"
+link = "https://orcid.org/0000-0001-7477-1308"
 
 [project.markdown_extensions]
 abbr = {}
 admonition = {}
 attr_list = {}
 def_list = {}
-footnotes = {}
+footnotes = { BACKLINK_TEXT = "↩" }
 md_in_html = {}
 toc = {
   permalink = true

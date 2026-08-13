@@ -1,0 +1,93 @@
+{% extends "main.html" %}
+
+{% block footer %}
+{% if page.meta.previous_title %}
+{% set previous_label = page.meta.previous_title %}
+{% else %}
+{% set previous_label = "Previous Post" %}
+{% endif %}
+
+{% if page.meta.next_title %}
+{% set next_label = page.meta.next_title %}
+{% else %}
+{% set next_label = "Next Post" %}
+{% endif %}
+
+<!-- Footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page -->
+  {% if "navigation.footer" in features %}
+    <!-- Link to previous and/or next page -->
+    {% if page.meta.previous or page.meta.next %}
+      {% if page.meta and page.meta.hide %}
+        {% set hidden = "hidden" if "blognav" in page.meta.hide or "footer" in page.meta.hide %}
+      {% endif %}
+      <nav
+        class="md-footer__inner md-grid"
+        aria-label="{{ lang.t('footer') }}"
+        {{ hidden }}
+      >
+
+        <!-- Link to previous page -->
+        {% if page.meta.previous %}
+          {% set direction = lang.t("footer.previous") %}
+          <a
+            href="{{ page.meta.previous | url }}"
+            class="md-footer__link md-footer__link--prev"
+            aria-label="{{ direction }}: {{ previous_label | e }}"
+          >
+            <div class="md-footer__button md-icon">
+              {% set icon = config.theme.icon.previous or "material/arrow-left" %}
+              {% include ".icons/" ~ icon ~ ".svg" %}
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                {{ direction }}
+              </span>
+              <div class="md-ellipsis">
+                {{ previous_label | e }}
+              </div>
+            </div>
+          </a>
+        {% endif %}
+
+        <!-- Link to next page -->
+        {% if page.meta.next %}
+          {% set direction = lang.t("footer.next") %}
+          <a
+            href="{{ page.meta.next | url }}"
+            class="md-footer__link md-footer__link--next"
+            aria-label="{{ direction }}: {{ next_label | e }}"
+          >
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                {{ direction }}
+              </span>
+              <div class="md-ellipsis">
+                {{ next_label | e }}
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              {% set icon = config.theme.icon.next or "material/arrow-right" %}
+              {% include ".icons/" ~ icon ~ ".svg" %}
+            </div>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% endif %}
+
+  <!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      {% include "partials/copyright.html" %}
+
+      <!-- Social links -->
+      {% if config.extra.social %}
+        {% include "partials/social.html" %}
+      {% endif %}
+    </div>
+  </div>
+</footer>
+{% endblock %}
